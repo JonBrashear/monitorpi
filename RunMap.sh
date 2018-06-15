@@ -1,4 +1,5 @@
 #!/bin/bash
+#Runs FileMapper.sh 6 times per hour
 l=0
 while [ $l -lt 6 ]; do
 	. /home/pi/CURRENT_REPORTS/FileMapper.sh

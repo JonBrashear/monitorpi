@@ -11,15 +11,17 @@ while t < l:
     t+=1
 
 for i in range(0,16):
+    # generate plots for all channels
     a=plt.plot(T,Data[i],'ro',markersize=.5)
     plt.xlabel('Time (s)')
     plt.ylabel('Current (A)')
-    string="Graph of Current vs. Time for "+"CH"+str(i)
-    
     plt.ylim([8,20])
+    string="Graph of Current vs. Time for "+"CH"+str(i) 
+    #Title of Plot
     plt.title(string)
     name="Plots/"+"CH"+str(i)+".png"
-    plt.savefig(name)
+    plt.savefig(name) 
+    # Save to Plots directory
     plt.cla()
 
 

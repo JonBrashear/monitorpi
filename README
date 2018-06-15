@@ -1,0 +1,20 @@
+CURRENT MONITORING SYSTEM:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SUMMARY:
+Raspberry Pis are used to monitor the current drawn by the HGC readout system. Hall Effect Sensors measure the current, and output analog signals, which are read by analog to digtal converters attached to thePi. This information is logged in files held in the Reports directory. One report file contains all the measurements taken by all the channels for roughly one hour. This document explains this the specifics of this system, as well as the various scripts used to manage/interpret this data.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------CURRENT MEASUREMENTS and REPORT PRODUCTION
+
+The analog to digital converters sit on a DAQC board called a PiPlate. PiPlates additionally provide a variety of functionallity such as digital outputs. However, they are mostly used for analog to digital conversion for this system. Each PiPlatecomes with 8 ADC channels, but 10 Hall Effect Sensors are used. To get around this, two piplates are stacked on top of one another.
+
+
+
+ For more information on the PiPlate, see url : https://pi-plates.com/daqc-users-guide/
+
+Note that the control library for the DAQCplate is written in python 3, so python scripts are used in the system.
+
+
+
+The bash script MakeReport.sh runs a python script that reads the output from every Hall Sensor !!once per second!!. It the writes these measurements to a file in the Reports directory.Each line in one of these files contains readouts for all channels at a certain time. The measurements for each channel are separated from each other by commas. Channel one of After one hour, itterminates. MakeReport.sh is run repeatedly by the bash script RunReport.sh*. Since every hour, a new report file is added to the Reports directory, each report must be assigned a unique name. The easiestmethod would be to name the file after the time at which it was created. However, this method would encounter multiple problems: First, the Raspberry Pi doesn't have a clock that remains active when it is not on. Thus, if the system is shut down, the Pi will not know the time when it is turned back on, and will use the time at shutdown. The obvious answer to this problem is to ssh into a host that has an acccurate clock. !! !! 
+
+However, we did not want to assume that the pi would always have a good SSH connection, so a system for creating unique filenames that uses only local resources is implemented.
