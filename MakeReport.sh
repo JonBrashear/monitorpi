@@ -3,7 +3,7 @@
 # It assigns each report a unique name based on a counter file.
 
 # First, read in counter.txt to assign report name:
-echo $(date) > Time.txt
+t1= $(date +'%s')
 read C < /home/pi/CURRENT_REPORTS/counter.txt 
 #The name of the report is then
 Name="Report"$C
@@ -24,6 +24,6 @@ while [ $index -lt 3600 ]; do
 	let index=index+1
 	sleep 1
 done
-echo $(date) >> Time.txt
-mv Time.txt Time1.txt
+t2= $(date +'%s')
+echo $((t2-t1)) >> Time.txt
 
