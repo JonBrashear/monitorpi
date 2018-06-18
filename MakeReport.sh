@@ -14,8 +14,8 @@ echo $(date +"%s") > /home/pi/CURRENT_REPORTS/Dates/CreationTime.txt
 #And then Start File Mapping
 . /home/pi/CURRENT_REPORTS/RunMap.sh&
 #Making Report:
-sudo touch /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
-sudo chmod a+w /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
+touch /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
+chmod a+w /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
 # Now Take The Actual Measurements
 index=0
 while [ $index -lt 3600 ]; do
