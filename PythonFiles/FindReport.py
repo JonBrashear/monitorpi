@@ -13,6 +13,7 @@ def LinSearch(TD,Times,Reports):
             RL.append(line[2:22]+": "+Reports[n][2:-1]+".txt")
             if a == 0:
                 n_minus1=n-1
+                a=1
         n+=1
     if RL == []:
         # if the list of reports was empty, nothing matched the target date
@@ -22,11 +23,11 @@ def LinSearch(TD,Times,Reports):
         print("The reports below were created in the specified hour: ")
         for e in RL:
             print(e)
-            #It is also possible that the a file created 1 hour earlier has measurements from the desired hour. 
-            #Information about the report created immeadiately before the 1st report created in the target hour is thus displayed as well
-            print("\nThe time/title of the report created immediately before this/these report(s) is also displayed below")
-            print("It may contain measurements from the desired hour")
-            print(Times[n_minus1][2:22]+": "+Reports[n_minus1][2:-1]+".txt")
+        #It is also possible that the a file created 1 hour earlier has measurements from the desired hour. 
+        #Information about the report created immeadiately before the 1st report created in the target hour is thus displayed as well
+        print("\nThe time/title of the report created immediately before this/these report(s) is also displayed below")
+        print("It may contain measurements from the desired hour")
+        print(Times[n_minus1][2:22]+": "+Reports[n_minus1][2:-1]+".txt")
 
 # Read in lists of file creation times and corresponding report numbers from Date_To_File.txt log
 CreationTimes,Reports=np.loadtxt('/home/pi/CURRENT_REPORTS/Dates/Date_To_File.txt',dtype=str, delimiter=',',skiprows=1, usecols=(0,1),unpack=True)
