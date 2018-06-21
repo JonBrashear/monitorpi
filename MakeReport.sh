@@ -3,7 +3,6 @@
 # It assigns each report a unique name based on a counter file.
 
 # First, read in counter.txt to assign report name:
-t1=$(date +'%s')
 read C < /home/pi/CURRENT_REPORTS/counter.txt 
 #The name of the report is then
 Name="Report"$C
@@ -17,12 +16,13 @@ echo $(date +"%s") > /home/pi/CURRENT_REPORTS/Dates/CreationTime.txt
 touch /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
 chmod a+w /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
 # Now Take The Actual Measurements
-index=0
-while [ $index -lt 3600 ]; do
-	python3 /home/pi/CURRENT_REPORTS/PythonFiles/GetCurrent.py >> /home/pi/CURRENT_REPORTS/Reports/$Name".txt" &
-	let index=index+1
+Date=$(date -u +"%s")
+echo $Date > T.txt
+EndDate=$((Date+3600))
+echo $EndDate >> T.txt
+while [ $Date -lt $EndDate ]; do
+	python3 CURRENT_REPORTS/PythonFiles/GetCurrent.py >> CURRENT_REPORTS/Reports/$Name".txt" &
 	sleep 1
+	Date=$(date -u +"%s")
 done
-t2=$(date +'%s')
-echo $((t2-t1)) >> Time.txt
 
