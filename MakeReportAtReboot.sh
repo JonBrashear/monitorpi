@@ -3,6 +3,7 @@
 # It assigns each report a unique name based on a counter file.
 
 # First, read in counter.txt to assign report name:
+sleep 5
 read C < /home/pi/CURRENT_REPORTS/counter.txt 
 #The name of the report is then
 Name="Report"$C
@@ -18,9 +19,11 @@ chmod a+w /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
 # Now Take The Actual Measurements
 Day=$(date -u + "%d-%h-%Y")
 Day=$(date --date=$Day +"%s")
-Hour=$(date -u + "H")
-EndDate=$((Day+3600+Hour+3600))
+Hour=$(date -u +"%H")
+EndDate=$((Day+3600*Hour+3600))
 Date=$(date -u +"%s")
+echo $Date > T.txt
+echo $EndDate >> T.txt
 while [ $Date -lt $EndDate ]; do
 	python3 /home/pi/CURRENT_REPORTS/PythonFiles/GetCurrent.py >> /home/pi/CURRENT_REPORTS/Reports/$Name".txt" &
 	sleep 1

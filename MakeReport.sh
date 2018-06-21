@@ -17,12 +17,14 @@ touch /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
 chmod a+w /home/pi/CURRENT_REPORTS/Reports/$Name".txt"
 # Now Take The Actual Measurements
 Date=$(date -u +"%s")
-echo $Date > T.txt
+d1=$Date
 EndDate=$((Date+3600))
-echo $EndDate >> T.txt
+function calc { awk "BEGIN {print "$*"}" ;}
+SleepTime=$(calc 1/$FREQ)
 while [ $Date -lt $EndDate ]; do
 	python3 CURRENT_REPORTS/PythonFiles/GetCurrent.py >> CURRENT_REPORTS/Reports/$Name".txt" &
-	sleep 1
+	sleep $SleepTime
 	Date=$(date -u +"%s")
 done
-
+d2=$Date
+echo $((d2-d1)) >> Time1.txt
