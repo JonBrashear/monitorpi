@@ -24,9 +24,12 @@ EndDate=$((Day+3600*Hour+3600))
 Date=$(date -u +"%s")
 echo $Date > T.txt
 echo $EndDate >> T.txt
+function calc { awk "BEGIN {print "$*"}" ;}
+SleepTime=$(calc 1/$FREQ)
+echo $SleepTime >>T.txt
 while [ $Date -lt $EndDate ]; do
 	python3 /home/pi/CURRENT_REPORTS/PythonFiles/GetCurrent.py >> /home/pi/CURRENT_REPORTS/Reports/$Name".txt" &
-	sleep 1
+	sleep $SleepTime
 	Date=$(date -u +"%s")
 done
 
