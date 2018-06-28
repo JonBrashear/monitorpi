@@ -25,11 +25,11 @@ def LinSearch(TD,Times,Reports):
             print(e)
         #It is also possible that the a file created 1 hour earlier has measurements from the desired hour. 
         #Information about the report created immeadiately before the 1st report created in the target hour is thus displayed as well
-        #LastReport=Reports[n_minus1][2:-1]
-        #if LastReport != "Report#": 
-         #   print("\nThe time/title of the report created immediately before this/these report(s) is also displayed below")
-          #  print("It may contain measurements from the desired hour")
-           # print(Times[n_minus1][2:22]+": "+LastReport+".txt")
+        LastReport=Reports[n_minus1][2:-1]
+        if LastReport != "Report#": 
+            print("\nThe time/title of the report created immediately before this/these report(s) is also displayed below")
+            print("It may contain measurements from the desired hour")
+            print(Times[n_minus1][2:22]+": "+LastReport+".txt")
 
 # Read in lists of file creation times and corresponding report numbers from Date_To_File.txt log
 CreationTimes,Reports=np.loadtxt('/home/pi/CURRENT_REPORTS/Dates/Date_To_File.txt',dtype=str,comments='%',delimiter=',', usecols=(0,1),unpack=True)
