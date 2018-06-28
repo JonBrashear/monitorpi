@@ -1,6 +1,0 @@
-Sample Format: ReportName.txt,Frequency,Duration
-Report23.txt,4,3600
-Report27.txt,4,124
-Report28.txt,4,125
-Report29.txt,4,210
-Report30.txt,4,2913
