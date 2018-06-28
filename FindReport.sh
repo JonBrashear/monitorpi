@@ -44,8 +44,8 @@ while [ $error == true ]; do
 done
 # Then, the entered date is re-formatted in the style of the entries of the Date_To_File log
 TargetDate=${Date:0:4}"-"${Date:5:2}"-"${Date:8:2}"--"${Date:(-2)}
-echo $TargetDate > Dates/TargetDate.txt
+echo $TargetDate > ../Dates/TargetDate.txt
 echo "-----------------------------------------------------------"
 # A python script then does a linear search on the Date_To_File Log to find the specified report.
 # Note, the search has been tested on a log with 40,000 entries ( > 4 years worth of reports), and still returns an answer in < 5 seconds
-python3 PythonFiles/FindReport.py
+python3 ../PythonFiles/FindReport.py
